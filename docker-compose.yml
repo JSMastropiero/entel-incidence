@@ -1,4 +1,3 @@
-
 version: '3.9'
 
 services:
@@ -20,8 +19,10 @@ services:
       - DB_NAME=devdb
       - DB_USER=devuser
       - DB_PASS=changeme
+      - ELASTICSEARCH_HOST=elasticsearch:9200  
     depends_on:
       - db
+      - elasticsearch  
 
   db:
     image: postgres:13-alpine
@@ -29,3 +30,11 @@ services:
       - POSTGRES_DB=devdb
       - POSTGRES_USER=devuser
       - POSTGRES_PASSWORD=changeme
+
+  elasticsearch:  
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.16.3
+    environment:
+      - node.name=elasticsearch
+      - discovery.type=single-node
+    ports:
+      - 9200:9200

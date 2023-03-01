@@ -17,6 +17,12 @@ RUN python -m venv /py && \
     apk del .tmp-deps && \
     adduser --disabled-password --no-create-home app
 
-ENV PATH="/py/bin:$PATH"
+RUN apk add --no-cache openjdk11 && \
+    wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.16.3-linux-x86_64.tar.gz && \
+    tar -xzf elasticsearch-7.16.3-linux-x86_64.tar.gz && \
+    rm elasticsearch-7.16.3-linux-x86_64.tar.gz && \
+    mv elasticsearch-7.16.3 /usr/share/elasticsearch
+
+ENV PATH="/py/bin:/usr/share/elasticsearch/bin:$PATH"
 
 USER app
