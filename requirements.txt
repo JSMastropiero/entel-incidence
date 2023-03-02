@@ -1,3 +1,6 @@
 django>=4.1.4,<4.2
 django-rest-framework
 psycopg2>=2.9.5,<2.9.9
+elasticsearch>=7.0.0,<8.0.0
+django_elasticsearch_dsl
+django_elasticsearch_dsl_drf
